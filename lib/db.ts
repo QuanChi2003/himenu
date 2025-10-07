@@ -7,8 +7,8 @@ declare global {
 const pool =
   global.pgPool ||
   new Pool({
-    connectionString: process.env.SUPABASE_DB_URL,
-    ssl: process.env.SUPABASE_DB_URL?.includes('supabase') ? { rejectUnauthorized: false } : undefined
+    connectionString: process.env.DATABASE_URL || process.env.SUPABASE_DB_URL,
+    ssl: (process.env.SUPABASE_DB_URL?.includes('supabase')) ? { rejectUnauthorized: false } : undefined
   })
 
 if (process.env.NODE_ENV !== 'production') {

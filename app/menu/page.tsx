@@ -10,7 +10,8 @@ type Item = {
   name: string
   description: string
   image_url: string
-  sale_price: number
+  sale_price: number | string
+  category_id?: string
 }
 
 type Category = {
@@ -75,13 +76,13 @@ export default function MenuPage() {
             <h2 className="text-3xl font-bold text-gray-800 mb-6">{category.name}</h2>
             
             {category.children.map((child: any) => {
-              const childItems = menu.find(c => c.id === category.id)?.items.filter(i => i.category_id === child.id) || []
+              if (!child.items || child.items.length === 0) return null
               
               return (
                 <div key={child.id} className="mb-8">
                   <h3 className="text-2xl font-semibold text-gray-700 mb-4">{child.name}</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {childItems.map(item => (
+                    {child.items.map((item: Item) => (
                       <ItemCard key={item.id} item={item} onAdd={addToCart} />
                     ))}
                   </div>
@@ -116,7 +117,7 @@ function ItemCard({ item, onAdd }: { item: Item, onAdd: (item: Item) => void }) 
       <p className="text-gray-600 text-sm mb-4">{item.description}</p>
       <div className="flex justify-between items-center">
         <span className="text-2xl font-bold text-orange-600">
-          {item.sale_price.toLocaleString('vi-VN')}đ
+          {Number(item.sale_price).toLocaleString('vi-VN')}đ
         </span>
         <button onClick={() => onAdd(item)} className="btn btn-primary">
           Thêm +

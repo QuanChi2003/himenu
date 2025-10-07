@@ -24,7 +24,10 @@ export async function GET() {
     const parents = categories.filter(c => !c.parent_id)
     const menuData = parents.map(parent => ({
       ...parent,
-      children: categories.filter(c => c.parent_id === parent.id),
+      children: categories.filter(c => c.parent_id === parent.id).map(child => ({
+        ...child,
+        items: items.filter(i => i.category_id === child.id)
+      })),
       items: items.filter(i => i.category_id === parent.id)
     }))
 
