@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "framework": "nextjs",
+  "buildCommand": "npm run build",
+  "devCommand": "npm run dev",
+  "installCommand": "npm install",
+  "regions": ["sin1"],
+  "env": {
+    "DATABASE_URL": "@database_url",
+    "ADMIN_USER": "@admin_user",
+    "ADMIN_PASS": "@admin_pass",
+    "JWT_SECRET": "@jwt_secret",
+    "SESSION_SECRET": "@session_secret",
+    "TELEGRAM_BOT_TOKEN": "@telegram_bot_token",
+    "TELEGRAM_CHAT_ID": "@telegram_chat_id"
+  }
+}
